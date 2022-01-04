@@ -17,7 +17,10 @@
 <body>
   <div class="kontener2" id="kontener2">
     <h1>Pigeon Courier Express</h1>
-    <div><img src="gambar/animated-dove-gif-5.gif" /></div>
+    <div><img src="gambar/animated-dove-gif-5.gif" /></div>    
+    <input type="text" id="sender" placeholder="Masukkan nama pengirim" style="font-size: 18px; padding: 10px; margin-bottom: 20px; border-radius: 7px; text-align: center;" />
+    <br/>
+    <div id="error_msg" style="color: red; padding-bottom: 10px;"></div>
     <button class="tombol" id="tombol">Lacak sekarang</button>
   </div>
 
@@ -85,6 +88,18 @@
     $(document).ready(function () {
       var audio = new Audio('audio/audio.mp3');
       $("#tombol").click(function () {
+        var senderVal = $('#sender').val();
+
+        if(!senderVal) {
+          $('#error_msg').html('Harap masukkan nama pengirim.');
+          return;
+        }
+
+        if(senderVal.toLowerCase().trim() != 'wiratama saputra') {
+          $('#error_msg').html('Nama pengirim tidak terdaftar.');
+          return;
+        }
+
         $("#kontener2").fadeOut();
         $("#kontener").fadeIn("4000");
         audio.play();
